@@ -119,7 +119,7 @@ void TextWindow::DescribeSelection() {
                 p = SK.GetEntity(e->point[0])->PointGetNum();
                 Printf(false, "%FtWORKPLANE%E");
                 PrintPointLink(true, "origin", e->point[0]);
-                PrintNormalLink(false, "nomral", e->normal);
+                PrintNormalLink(false, "normal", e->normal);
                 break;
             }
             case Entity::Type::LINE_SEGMENT: {
