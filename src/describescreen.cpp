@@ -278,11 +278,28 @@ void TextWindow::DescribeSelection() {
             for(hConstraint hc : lhc) {
                 Constraint *c = SK.GetConstraint(hc);
                 std::string s = c->DescriptionString();
-                Printf(false, "%Bp   %Fl%Ll%D%f%h%s%E %s",
-                    (a & 1) ? 'd' : 'a',
-                    c->h.v, (&TextWindow::ScreenSelectConstraint),
-                    (&TextWindow::ScreenHoverConstraint), s.c_str(),
-                    c->reference ? "(ref)" : "");
+		Group *cg = SK.GetGroup(c->group);
+
+		if (cg->order == g->order) {
+		    Printf(false, "%Bp   %Fl%Ll%D%f%h%s%E %s",
+			(a & 1) ? 'd' : 'a',
+			c->h.v, (&TextWindow::ScreenSelectConstraint),
+			(&TextWindow::ScreenHoverConstraint), s.c_str(),
+			c->reference ? "(ref)" : "");
+		} else {
+		    // @@@ can cg->order < g->order ever happen ?
+		    Printf(false, "%Bp   %Fl%Ll%D%f%h%s%E %s %Fp%Ll%D%f%s",
+			(a & 1) ? 'd' : 'a',
+			c->h.v,
+			&TextWindow::ScreenSelectConstraint,
+			&TextWindow::ScreenHoverConstraint,
+			s.c_str(),
+			c->reference ? "(ref)" : "",
+			cg->order < g->order ? 'd' : 'x',
+			cg->h.v,
+			&TextWindow::ScreenActivateGroup,
+			cg->DescriptionString().c_str());
+		}
                 a++;
             }
         }
