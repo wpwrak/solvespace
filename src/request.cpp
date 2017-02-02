@@ -205,7 +205,7 @@ std::string Request::DescriptionString() const {
             case Type::CUBIC:           s = "cubic-bezier";   break;
             case Type::CUBIC_PERIODIC:  s = "periodic-cubic"; break;
             case Type::CIRCLE:          s = "circle";         break;
-            case Type::ARC_OF_CIRCLE:   s = "arc-of-circle;";  break;
+            case Type::ARC_OF_CIRCLE:   s = "arc-of-circle";  break;
             case Type::TTF_TEXT:        s = "ttf-text";       break;
         }
     }
